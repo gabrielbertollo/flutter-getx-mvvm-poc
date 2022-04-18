@@ -33,6 +33,21 @@ class PostWidget extends StatelessWidget {
               child: Image.network(
                 post.imageUrl,
                 fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  }
+
+                  return Container(
+                    height: MediaQuery.of(context).size.width,
+                    color: Colors.grey[300],
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.grey[400],
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
             Padding(
@@ -71,7 +86,7 @@ class PostWidget extends StatelessWidget {
                         children: [
                           const Icon(Icons.favorite_border),
                           const SizedBox(width: 8),
-                          const Text('100'),
+                          Text('${post.likes}'),
                         ],
                       ),
                     ],
