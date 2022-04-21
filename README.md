@@ -1,16 +1,47 @@
-# flutter_getx_mvvm_poc
+# Flutter GetX MVVM POC
 
-A new Flutter project.
+This project is a Proof of Concept for architecture, state management and dependency injection solutions.\
+Here you can find a concrete implementation of MVVM (with some Clean Arch concepts), using the GetX ecosystem for navigation, bindings and state management.
+
+## App Features
+
+- Page to create a new post
+- Posts list
+
+## Used Packages
+
+- equatable
+- faker
+- get
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Architecture
 
-A few resources to get you started if this is your first Flutter project:
+The project root folder is the `lib` folder. This folder contains the project subfolders of the MVVM architecture: `model`, `view` and `view_model`.\
+The `model` layer contains all the data, business logic and code validations. In this layer, the content is divided in subfolders similar to the Clean Architecture, separating the classes that communicate with the outside world (APIs) from the ones that provide the information to inner layers of the app.\
+In the `view_model` layer is the classes that serves as intermediators between the `model` and the `view` layer, containing methods to notify the `view` whenever needed.\
+The last layer, `view`, is where all the UI is located. Here are all the widgets and pages used, as well as the methods that requests data from the `view_model` layer.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Dependency Injection
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The dependency injection is done by using the methods provided by the GetX ecosystem, inserting the bindings inside the `core` folder in the `model` layer, and then binding them to the routes in the `main.dart` file.
+
+### Routing
+
+The app navigation is implemented using the GetX routing system in the `main.dart` file. To navigate to another page, use onde of the GetX provided methos, such as: `Get.to` or `Get.toNamed`.
+
+### State Management
+
+The State Management used for this project is the one provided by GetX, with GetXControllers.\
+The controllers are located inside the `view` layer, along the pages themselves, and provide the screens with the methods necessary to call data from the other layers.
+To access a controller inside a screen, use: `Get.find()`.
+
+### Screens
+
+This is a simple app, with just 2 screens.
+
+- Home
+- Create Post
+
+The Home page contains a simple list of posts and a button to navigate to the Create Post page. In the Create Post Page is a text field area and a button to publish the data. After clicking this button, the navigatiion returns to Home.
