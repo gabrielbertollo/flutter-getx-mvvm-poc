@@ -1,12 +1,12 @@
 # Flutter GetX MVVM POC
 
-This project is a Proof of Concept for architecture, state management and dependency injection solutions.\
+This project is a simple posts application containing a list of fake posts and a page to create a new one, that serves as a Proof of Concept for architecture, state management and dependency injection solutions.\
 Here you can find a concrete implementation of MVVM (with some Clean Arch concepts), using the GetX ecosystem for navigation, bindings and state management.
 
 ## App Features
 
 - Page to create a new post
-- Posts list
+- Posts list from a local random generated model
 
 ## Used Packages
 
