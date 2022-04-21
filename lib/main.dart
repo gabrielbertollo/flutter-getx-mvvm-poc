@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_mvvm_poc/model/core/posts_binding.dart';
+import 'package:flutter_getx_mvvm_poc/view/pages/create_post/create_post_page.dart';
 import 'package:get/get.dart';
 
 import 'view/pages/home/home_page.dart';
@@ -11,9 +13,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const title = 'Selfy POS';
-    return const GetMaterialApp(
+    return GetMaterialApp(
       title: title,
-      home: HomePage(),
+      initialRoute: '/',
+      initialBinding: PostsBinding(),
+      getPages: [
+        GetPage(
+          name: '/',
+          page: () => const HomePage(),
+        ),
+        GetPage(
+          name: '/create_post',
+          page: () => const CreatePostPage(),
+        ),
+      ],
     );
   }
 }

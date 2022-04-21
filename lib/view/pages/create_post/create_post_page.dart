@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../model/infra/models/post_model.dart';
 import '../../../model/infra/models/user_model.dart';
-import '../../../model/infra/repositories/posts_repository_mock.dart';
-import '../../../view_model/posts/posts_view_model.dart';
 import '../posts_controller.dart';
 
 class CreatePostPage extends StatelessWidget {
@@ -12,11 +10,6 @@ class CreatePostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PostsController postsController = Get.put(
-      PostsController(
-        postsViewModel: PostsViewModel(PostsRepositoryMock()),
-      ),
-    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Post'),
@@ -27,7 +20,7 @@ class CreatePostPage extends StatelessWidget {
           children: [
             const Text('Create Post'),
             TextFormField(
-              controller: postsController.postFormController,
+              controller: Get.find<PostsController>().postFormController,
               decoration: const InputDecoration(
                 labelText: 'Type the post content',
               ),
@@ -35,10 +28,10 @@ class CreatePostPage extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                postsController.addPost(
+                Get.find<PostsController>().addPost(
                   PostModel(
                     author: UserModel.fake(),
-                    body: postsController.postFormController.text,
+                    body: Get.find<PostsController>().postFormController.text,
                     id: 1,
                     imageUrl: 'https://picsum.photos/id/1/200/300',
                     likes: 0,
