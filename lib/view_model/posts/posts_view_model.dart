@@ -1,21 +1,35 @@
-import 'package:flutter_getx_mvvm_poc/model/domain/entities/post_entity.dart';
-import 'package:flutter_getx_mvvm_poc/model/domain/repositories/posts_repository_interface.dart';
-import 'package:flutter_getx_mvvm_poc/model/infra/models/post_model.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class PostsViewModel {
-  final IPostsRepository _postsRepository;
+import '../../model/domain/entities/post_entity.dart';
+import '../../model/domain/usecases/get_posts_usecase.dart';
+import '../../model/infra/models/post_model.dart';
 
-  PostsViewModel(this._postsRepository);
+class PostsViewModel extends GetxController {
+  final GetPostsUsecase _getPostsUsecase;
 
-  Future<List<PostEntity>> loadPosts() async {
-    return await _postsRepository.getPosts();
+  final TextEditingController postFormController = TextEditingController();
+  List<PostEntity> _posts = <PostEntity>[].obs;
+
+  PostsViewModel({
+    required GetPostsUsecase getPostsUsecase,
+  }) : _getPostsUsecase = getPostsUsecase {
+    init();
   }
 
-  List<PostEntity> addPost({
-    required PostModel post,
-    required List<PostEntity> posts,
-  }) {
+  List<PostEntity> get posts => _posts;
+
+  set posts(List<PostEntity> value) {
+    _posts = value;
+    update();
+  }
+
+  Future<void> init() async {
+    posts.addAll(await _getPostsUsecase());
+  }
+
+  void addPost(PostModel post) {
     posts.insert(0, post);
-    return posts;
+    update();
   }
 }

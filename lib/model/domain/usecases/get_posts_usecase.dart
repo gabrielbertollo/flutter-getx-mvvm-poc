@@ -4,7 +4,7 @@ import 'package:flutter_getx_mvvm_poc/model/domain/repositories/posts_repository
 class GetPostsUsecase {
   final IPostsRepository postsRepository;
 
-  GetPostsUsecase(this.postsRepository);
+  const GetPostsUsecase({required this.postsRepository});
 
   Future<List<PostEntity>> call() async {
     return await postsRepository.getPosts();

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_mvvm_poc/view_model/posts/posts_view_model.dart';
 import 'package:get/get.dart';
 
 import '../../../model/infra/models/post_model.dart';
 import '../../../model/infra/models/user_model.dart';
-import '../posts_controller.dart';
 
 class CreatePostPage extends StatelessWidget {
   const CreatePostPage({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class CreatePostPage extends StatelessWidget {
           children: [
             const Text('Create Post'),
             TextFormField(
-              controller: Get.find<PostsController>().postFormController,
+              controller: Get.find<PostsViewModel>().postFormController,
               decoration: const InputDecoration(
                 labelText: 'Type the post content',
               ),
@@ -28,10 +28,10 @@ class CreatePostPage extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                Get.find<PostsController>().addPost(
+                Get.find<PostsViewModel>().addPost(
                   PostModel(
                     author: UserModel.fake(),
-                    body: Get.find<PostsController>().postFormController.text,
+                    body: Get.find<PostsViewModel>().postFormController.text,
                     id: 1,
                     imageUrl: 'https://picsum.photos/id/1/200/300',
                     likes: 0,
