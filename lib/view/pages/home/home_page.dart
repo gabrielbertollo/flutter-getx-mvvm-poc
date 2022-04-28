@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_mvvm_poc/view/pages/home/widgets/change_location_widget.dart';
 import 'package:flutter_getx_mvvm_poc/view_model/posts/posts_view_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/post_widget.dart';
@@ -12,7 +14,10 @@ class HomePage extends StatelessWidget {
     final PostsViewModel postsController = Get.find();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter GetX MVVM Poc'),
+        title: Text(AppLocalizations.of(context)!.appBarWelcomeMessage),
+        actions: const [
+          ChangeLocationWidget(),
+        ],
       ),
       body: SafeArea(
         child: Obx(() {
