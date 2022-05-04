@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_mvvm_poc/view_model/posts/posts_view_model.dart';
 import 'package:get/get.dart';
 
-import '../../../model/infra/models/post_model.dart';
-import '../../../model/infra/models/user_model.dart';
+import '../../../model/entities/post.dart';
+import '../../../model/serializers/user_serializer.dart';
+import '../../../view_model/posts/posts_view_model.dart';
 
 class CreatePostPage extends StatelessWidget {
   const CreatePostPage({Key? key}) : super(key: key);
@@ -29,8 +29,8 @@ class CreatePostPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 Get.find<PostsViewModel>().addPost(
-                  PostModel(
-                    author: UserModel.fake(),
+                  Post(
+                    author: UserSerializer().fake(),
                     body: Get.find<PostsViewModel>().postFormController.text,
                     id: 1,
                     imageUrl: 'https://picsum.photos/id/1/200/300',

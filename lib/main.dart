@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 
-import 'model/core/posts_binding.dart';
+import 'core/posts_binding.dart';
 import 'view/pages/create_post/create_post_page.dart';
 import 'view/pages/home/home_page.dart';
 

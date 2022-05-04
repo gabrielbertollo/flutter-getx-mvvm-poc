@@ -19,7 +19,7 @@ Here you can find a concrete implementation of MVVM (with some Clean Arch concep
 ### Architecture
 
 The project root folder is the `lib` folder. This folder contains the project subfolders of the MVVM architecture: `model`, `view` and `view_model`.\
-The `model` layer contains all the data, business logic and code validations. In this layer, the content is divided in subfolders similar to the Clean Architecture, separating the classes that communicate with the outside world (APIs) from the ones that provide the information to inner layers of the app.\
+The `model` layer contains all the data, business logic and code validations.
 In the `view_model` layer is the classes that serves as intermediators between the `model` and the `view` layer, containing methods to notify the `view` whenever needed.\
 The last layer, `view`, is where all the UI is located. Here are all the widgets and pages used, as well as the methods that requests data from the `view_model` layer.
 

@@ -1,34 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_mvvm_poc/model/entities/post.dart';
+import 'package:flutter_getx_mvvm_poc/model/repositories/posts_repository_mock.dart';
 import 'package:get/get.dart';
 
-import '../../model/domain/entities/post_entity.dart';
-import '../../model/domain/usecases/get_posts_usecase.dart';
-import '../../model/infra/models/post_model.dart';
-
 class PostsViewModel extends GetxController {
-  final GetPostsUsecase _getPostsUsecase;
+  final PostsRepositoryMock _postsRepository;
 
   final TextEditingController postFormController = TextEditingController();
-  List<PostEntity> _posts = <PostEntity>[].obs;
+  List<Post> _posts = <Post>[].obs;
 
   PostsViewModel({
-    required GetPostsUsecase getPostsUsecase,
-  }) : _getPostsUsecase = getPostsUsecase {
+    required PostsRepositoryMock postsRepository,
+  }) : _postsRepository = postsRepository {
     init();
   }
 
-  List<PostEntity> get posts => _posts;
+  List<Post> get posts => _posts;
 
-  set posts(List<PostEntity> value) {
+  set posts(List<Post> value) {
     _posts = value;
     update();
   }
 
   Future<void> init() async {
-    posts.addAll(await _getPostsUsecase());
+    posts.addAll(await _postsRepository.getPosts());
   }
 
-  void addPost(PostModel post) {
+  void addPost(Post post) {
     posts.insert(0, post);
     update();
   }

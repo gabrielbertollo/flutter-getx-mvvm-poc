@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_mvvm_poc/model/domain/entities/post_entity.dart';
+
+import '../../model/entities/post.dart';
 
 class PostWidget extends StatelessWidget {
-  final PostEntity post;
+  final Post post;
 
   const PostWidget({
     required this.post,
