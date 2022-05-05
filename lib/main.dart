@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_getx_mvvm_poc/core/create_post_binding.dart';
 import 'package:get/get.dart';
 
-import 'core/posts_binding.dart';
+import 'core/home_binding.dart';
 import 'view/pages/create_post/create_post_page.dart';
 import 'view/pages/home/home_page.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      initialBinding: PostsBinding(),
+      initialBinding: HomeBinding(),
       getPages: [
         GetPage(
           name: '/',
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/create_post',
           page: () => const CreatePostPage(),
+          binding: CreatePostBinding(),
         ),
       ],
     );

@@ -1,33 +1,27 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_getx_mvvm_poc/model/entities/post.dart';
 import 'package:flutter_getx_mvvm_poc/model/repositories/posts_repository_mock.dart';
-import 'package:get/get.dart';
 
-class PostsViewModel extends GetxController {
+class PostsViewModel {
   final PostsRepositoryMock _postsRepository;
-
-  final TextEditingController postFormController = TextEditingController();
-  List<Post> _posts = <Post>[].obs;
 
   PostsViewModel({
     required PostsRepositoryMock postsRepository,
-  }) : _postsRepository = postsRepository {
-    init();
+  }) : _postsRepository = postsRepository;
+
+  Future<List<Post>> getPosts() async {
+    return await _postsRepository.getPosts();
   }
 
-  List<Post> get posts => _posts;
-
-  set posts(List<Post> value) {
-    _posts = value;
-    update();
-  }
-
-  Future<void> init() async {
-    posts.addAll(await _postsRepository.getPosts());
-  }
-
-  void addPost(Post post) {
+  void addPostLocally({
+    required Post post,
+    required List<Post> posts,
+  }) {
     posts.insert(0, post);
-    update();
+    return;
+  }
+
+  void createPost(Post post) {
+    // TODO implement create post
+    return;
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_mvvm_poc/view/pages/create_post/create_post_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../model/entities/post.dart';
 import '../../../model/serializers/user_serializer.dart';
-import '../../../view_model/posts/posts_view_model.dart';
 
-class CreatePostPage extends StatelessWidget {
+class CreatePostPage extends GetView<CreatePostController> {
   const CreatePostPage({Key? key}) : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class CreatePostPage extends StatelessWidget {
           children: [
             const Text('Create Post'),
             TextFormField(
-              controller: Get.find<PostsViewModel>().postFormController,
+              controller: controller.postFormController,
               decoration: const InputDecoration(
                 labelText: 'Type the post content',
               ),
@@ -28,10 +28,10 @@ class CreatePostPage extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                Get.find<PostsViewModel>().addPost(
+                controller.addPost(
                   Post(
                     author: UserSerializer().fake(),
-                    body: Get.find<PostsViewModel>().postFormController.text,
+                    body: controller.postFormController.text,
                     id: 1,
                     imageUrl: 'https://picsum.photos/id/1/200/300',
                     likes: 0,
